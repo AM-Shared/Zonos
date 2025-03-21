@@ -60,9 +60,7 @@ import unicodedata
 import inflect
 import torch
 import torch.nn as nn
-from kanjize import number2kanji
 from phonemizer.backend import EspeakBackend
-from sudachipy import Dictionary, SplitMode
 
 if sys.platform == "darwin":
     os.environ["PHONEMIZER_ESPEAK_LIBRARY"] = "/opt/homebrew/lib/libespeak-ng.dylib"
@@ -168,11 +166,8 @@ def tokenize_phonemes(phonemes: list[str]) -> tuple[torch.Tensor, list[int]]:
     return torch.tensor(phoneme_ids), lengths
 
 
-def normalize_jp_text(text: str, tokenizer=Dictionary(dict="full").create()) -> str:
-    text = unicodedata.normalize("NFKC", text)
-    text = re.sub(r"\d+", lambda m: number2kanji(int(m[0])), text)
-    final_text = " ".join([x.reading_form() for x in tokenizer.tokenize(text, SplitMode.A)])
-    return final_text
+def normalize_jp_text(text: str, tokenizer) -> str:
+    raise NotImplementedError
 
 
 def clean(texts: list[str], languages: list[str]) -> list[str]:
