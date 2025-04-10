@@ -12,8 +12,6 @@ dependencies = [
     "kanjize>=1.5.0",
     "numpy>=2.2.2",
     "phonemizer>=3.3.0",
-    "sudachidict-full>=20241021",
-    "sudachipy>=0.6.10",
     "torchaudio>=2.5.1",
     "transformers>=4.48.1",
     "soundfile>=0.13.1",
@@ -30,7 +28,7 @@ compile = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["zonos"]
+include = ["zonos", "zonos.**"]
 
 [tool.uv]
 no-build-isolation-package = ["flash-attn", "mamba-ssm", "causal-conv1d"]
